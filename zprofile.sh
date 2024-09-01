@@ -9,11 +9,12 @@ function zprofile {
 }
 
 #
-# Login to AWS SSO
+# Login to AWS SSO and add credentials to AWS CLI
 #
 function awsl {
     [ -z "$1" ] && { echo "Usage: awsl <PROFILE>"; return 1; }
     aws sso login --profile $1
+    eval "$(aws configure export-credentials --profile $1 --format env)"
 }
 
 #
